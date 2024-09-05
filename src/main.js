@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import axios from 'axios'
+import ywRequest from './service'
 
 createApp(App).mount('#app')
 
@@ -77,35 +78,50 @@ createApp(App).mount('#app')
 // })
 
 
-axios.interceptors.request.use((config) => {
-  console.log("request success")
-  // start loading animation
-  // change the configuration
-  // 1. header
-  // 2. authentication cookie/token
-  // 3. change some request parameters
+// axios.interceptors.request.use((config) => {
+//   console.log("request success")
+//   // start loading animation
+//   // change the configuration
+//   // 1. header
+//   // 2. authentication cookie/token
+//   // 3. change some request parameters
 
-  return config
-}, (err) => {
-  console.log("request fail")
-  return err
-})
-axios.interceptors.response.use((res) => {
-  console.log("response success")
-  // end the loading animation
-  // change the data
-  return res.data
-}, (err) => {
-  console.log("response fail")
-  return err
+//   return config
+// }, (err) => {
+//   console.log("request fail")
+//   return err
+// })
+// axios.interceptors.response.use((res) => {
+//   console.log("response success")
+//   // end the loading animation
+//   // change the data
+//   return res.data
+// }, (err) => {
+//   console.log("response fail")
+//   return err
+// })
+
+// axios.get("http://123.207.32.32:9002/lyric", {
+//   params: {
+//     id: 500665346
+//   }
+// }).then(res => {
+//   console.log("res: ", res)
+// }).catch(err => {
+//   console.log(err)
+// })
+
+ywRequest.request({
+  url: "/lyric?id=500665346"
+}).then(res => {
+  console.log("res: ", res)
 })
 
-axios.get("http://123.207.32.32:9002/lyric", {
+ywRequest.get({
+  url: "/lyric",
   params: {
     id: 500665346
   }
 }).then(res => {
-  console.log("res: ", res)
-}).catch(err => {
-  console.log(err)
+  console.log(res)
 })
